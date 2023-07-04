@@ -11,12 +11,9 @@ yarn dev
 # or
 pnpm dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. After cloning this repo, you need to run `npm install` to install node_modules folder. 
+2. Modify the `.env` file according to your database
+3. To run the development server: `npm run dev` and open link: http://localhost:3000
 
 ## Learn More
 
