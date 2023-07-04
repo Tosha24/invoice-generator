@@ -1,4 +1,5 @@
-import './globals.css'
+import './globals.css';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +13,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div><Toaster/></div>
+        {children}
+      </body>
     </html>
   )
 }

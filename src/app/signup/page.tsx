@@ -6,42 +6,60 @@ import Link from "next/link";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [isLoading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [disabled, setDisabled] = useState(true);
 
+  const router = useRouter();
+
   const [user, setUser] = useState({
-    username: "",
+    companyName: "",
     email: "",
     password: "",
   });
 
   useEffect(() => {
-    if (user.username.length > 0 && user.email.length > 0 && user.password.length > 0) {
+    if (user.companyName.length > 0 && user.email.length > 0 && user.password.length > 0) {
       setDisabled(false);
+    } 
+    else {
+      setDisabled(true);
     }
   }, [user]);
 
   const handleSignup = async () => {
-    
+    try{
+      setLoading(true);
+      const response = await axios.post('/api/users/signup', user);
+      toast.success("Signup successfully");
+      console.log("Signup success", response.data);
+      router.replace('/');
+    }catch(error: any){
+      console.log("Signup failed: ", error.message);
+      toast.error(error.message);
+    }
+    finally{
+      setLoading(false);
+    }
   };
 
   return (
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-4">
-          <label className="block text-sm font-medium leading-6 text-gray-900" htmlFor="username">
+          <label className="block text-sm font-medium leading-6 text-gray-900" htmlFor="companyName">
               Company Name
             </label>
             <div className="mt-2">
               <input
                 type="text"
-                value={user.username}
-                id="username"
+                value={user.companyName}
+                id="companyName"
                 className="form-input block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-fuchsia-900 sm:text-sm sm:leading-6"
-                onChange={(e) => setUser({ ...user, email: e.target.value })} required
+                onChange={(e) => setUser({ ...user, companyName: e.target.value })} required
               />
             </div>
             <label className="block text-sm font-medium leading-6 text-gray-900" htmlFor="email">

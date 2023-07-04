@@ -1,0 +1,8 @@
+bcryptjs
+react-icons
+mongoose
+nodemailer
+clsx
+axios
+react-hot-toast
+jsonwebtoken
