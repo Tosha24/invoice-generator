@@ -7,6 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#2E86DE',
+      },
+      fontFamily:{
+        titleFont: 'Noto Sans, sans-serif',
+        bodyFont: 'Noto Sans JP, sans-serif',
+      }
     },
   },
   plugins: [],
