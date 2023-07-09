@@ -23,17 +23,25 @@ class InvoiceItem extends React.Component {
       <div>
         <table>
           <thead>
-            <tr className='border-t-2 border-b-2 border-gray-400'>
-              <th>No.</th>
+            <tr className='border-t-2 border-b-2 border-gray-200'>
+              <th className="py-2">No.</th>
               <th className="text-center">ITEM</th>
               <th>QTY</th>
               <th>PRICE/RATE</th>
               <th className="text-center">ACTION</th>
             </tr>
           </thead>
-          <tbody>{itemTable}</tbody>
+          <tbody>
+            <tr>
+              <td className="py-1"></td>
+            </tr>
+            {itemTable}
+            <tr>
+              <td className="py-1"></td>
+            </tr>
+          </tbody>
         </table>  
-        <button className="bg-lightColor p-2 font-medium text-md text-white mt-2 rounded-lg" onClick={this.props.onRowAdd}>
+        <button className="bg-primaryColor p-2 px-3 font-medium text-md text-white mt-2 rounded-lg hover:bg-hoverColor" onClick={this.props.onRowAdd}>
           Add Item
         </button>
       </div>

@@ -27,7 +27,7 @@ const Banner = () => {
       </Link>
       </div>
       <div className='hidden lg:inline-flex'>
-        <Image src={invoice} alt="bg"/>
+        <Image src={invoice} alt="bg" />
       </div>
     </section>
   );

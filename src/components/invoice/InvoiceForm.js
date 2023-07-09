@@ -306,7 +306,7 @@ class InvoiceForm extends React.Component {
               <div className="sticky top-0 pt-md-3 pt-xl-4">
                 <button
                   type="submit"
-                  className="block w-full bg-primaryColor text-white tracking-wider p-2 rounded-lg"
+                  className="block w-full bg-primaryColor hover:bg-hoverColor text-white tracking-wider py-2 rounded-lg"
                 >
                   Review Invoice
                 </button>
