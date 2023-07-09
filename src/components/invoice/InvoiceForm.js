@@ -1,13 +1,6 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-import InvoiceItem from './InvoiceItem';
-import InvoiceModal from './InvoiceModal';
-import InputGroup from 'react-bootstrap/InputGroup';
+import React from "react";
+import InvoiceItem from "./InvoiceItem";
+import InvoiceModal from "./InvoiceModal";
 import moment from "moment";
 
 class InvoiceForm extends React.Component {
@@ -15,37 +8,37 @@ class InvoiceForm extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      currency: '₹',
-      currentDate: '',
+      currency: "₹",
+      currentDate: "",
       invoiceNumber: 1,
-      dateOfIssue: '',
-      billTo: '',
-      billToEmail: '',
-      billToAddress: '',
-      billFrom: '',
-      billFromEmail: '',
-      billFromAddress: '',
-      notes: '',
-      total: '0.00',
-      subTotal: '0.00',
-      taxRate: '',
-      taxAmmount: '0.00',
-      discountRate: '',
-      discountAmmount: '0.00'
+      dateOfIssue: "",
+      billTo: "",
+      billToEmail: "",
+      billToAddress: "",
+      billFrom: "",
+      billFromEmail: "",
+      billFromAddress: "",
+      notes: "",
+      total: "0.00",
+      subTotal: "0.00",
+      taxRate: "",
+      taxAmmount: "0.00",
+      discountRate: "",
+      discountAmmount: "0.00",
     };
     this.state.items = [
       {
         id: 0,
-        name: '',
-        description: '',
-        price: '0.00',
-        quantity: 1
-      }
+        name: "",
+        description: "",
+        price: "0.00",
+        quantity: 1,
+      },
     ];
     this.editField = this.editField.bind(this);
   }
   componentDidMount(prevProps) {
-    this.handleCalculateTotal()
+    this.handleCalculateTotal();
   }
   handleRowDel(items) {
     var index = this.state.items.indexOf(items);
@@ -53,15 +46,16 @@ class InvoiceForm extends React.Component {
     this.setState(this.state.items);
     this.handleCalculateTotal();
   }
+
   handleAddEvent(evt) {
-    var id = (+ new Date() + Math.floor(Math.random() * 999999)).toString(36);
+    var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     var items = {
       id: id,
-      name: '',
-      price: '0.00',
-      description: '',
-      quantity: 1
-    }
+      name: "",
+      price: "0.00",
+      description: "",
+      quantity: 1,
+    };
     this.state.items.push(items);
     this.setState(this.state.items);
     this.handleCalculateTotal();
@@ -113,10 +107,10 @@ class InvoiceForm extends React.Component {
     var item = {
       id: evt.target.id,
       name: evt.target.name,
-      value: evt.target.value
+      value: evt.target.value,
     };
     var items = this.state.items.slice();
-    var newItems = items.map(function(items) {
+    var newItems = items.map(function (items) {
       for (var key in items) {
         if (key == item.name && items.id == item.id) {
           items[key] = item.value;
@@ -124,12 +118,12 @@ class InvoiceForm extends React.Component {
       }
       return items;
     });
-    this.setState({items: newItems});
+    this.setState({ items: newItems });
     this.handleCalculateTotal();
-  };
+  }
   editField = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
     this.handleCalculateTotal();
   };
@@ -137,131 +131,265 @@ class InvoiceForm extends React.Component {
     this.setState(selectedOption);
   };
   openModal = (event) => {
-    event.preventDefault()
-    this.handleCalculateTotal()
-    this.setState({isOpen: true})
+    event.preventDefault();
+    this.handleCalculateTotal();
+    this.setState({ isOpen: true });
   };
-  closeModal = (event) => this.setState({isOpen: false});
+  closeModal = (event) => this.setState({ isOpen: false });
   render() {
     return (
-    <Form onSubmit={this.openModal}>
-      <Row>
-        <Col md={8} lg={9}>
-          <Card className="p-4 p-xl-5 my-3 my-xl-4">
-            <div className="d-flex flex-row align-items-start justify-content-between mb-3">
-              <div className="d-flex flex-column">
-                <div className="d-flex flex-column">
-                  <div className="mb-2">
-                    <span className="fw-bold">Current&nbsp;Date:&nbsp;</span>
-                    <span className="current-date">{moment().format("DD-MM-YYYY")}</span>
+      <>
+      <div>
+        <form
+          onSubmit={this.openModal}
+        >
+          <div className="flex flex-row gap-4">
+            <div className="flex flex-col col-md-8 col-lg-9">
+              <div className="border border-gray-200 rounded-lg p-4 p-xl-5 my-3 my-xl-4">
+                <div className="flex flex-row items-start justify-between mb-3">
+                  <div className="flex flex-col">
+                    <div className="flex flex-col">
+                      <div className="mb-2">
+                        <span className="font-bold">Current Date: </span>
+                        <span>{moment().format("DD-MM-YYYY")}</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-row items-center">
+                      <span className="font-bold block mr-2">Due Date: </span>
+                      <input
+                        type="date"
+                        value={this.state.dateOfIssue}
+                        name="dateOfIssue"
+                        onChange={(event) => this.editField(event)}
+                        className="max-w-[150px] pl-4 p-[6px] rounded-lg bg-borderColor"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center">
+                    <span className="font-bold me-2">Invoice Number: </span>
+                    <input
+                      type="number"
+                      className="max-w-[70px] bg-borderColor p-[6px] rounded-lg pl-3"
+                      value={this.state.invoiceNumber}
+                      name="invoiceNumber"
+                      onChange={(event) => this.editField(event)}
+                      min="1"
+                      required
+                    />
                   </div>
                 </div>
-                <div className="d-flex flex-row align-items-center">
-                  <span className="fw-bold d-block me-2">Due&nbsp;Date:</span>
-                  <Form.Control type="date" value={this.state.dateOfIssue} name={"dateOfIssue"} onChange={(event) => this.editField(event)} style={{
-                      maxWidth: '150px'
-                    }} required="required"/>
+                <hr className="my-4" />
+                <div className="mb-5 flex flex-row gap-4">
+                  <div className="w-full flex flex-col gap-2">
+                    <label className="font-bold">Bill to:</label>
+                    <input
+                      placeholder="Who is this invoice to?"
+                      className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-borderColor rounded-lg"
+                      value={this.state.billTo}
+                      type="text"
+                      name="billTo"
+                      onChange={(event) => this.editField(event)}
+                      autoComplete="name"
+                      required
+                    />
+                    <input
+                      placeholder="Email address"
+                      className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-borderColor rounded-lg"
+                      value={this.state.billToEmail}
+                      type="email"
+                      name="billToEmail"
+                      onChange={(event) => this.editField(event)}
+                      autoComplete="email"
+                      required
+                    />
+                    <input
+                      placeholder="Billing address"
+                      className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-borderColor rounded-lg"
+                      value={this.state.billToAddress}
+                      type="text"
+                      name="billToAddress"
+                      onChange={(event) => this.editField(event)}
+                      autoComplete="address"
+                      required
+                    />
+                  </div>
+                  <div className="w-full flex flex-col gap-2">
+                    <label className="font-bold">Bill from:</label>
+                    <input
+                      placeholder="Who is this invoice from?"
+                      className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-borderColor rounded-lg"
+                      value={this.state.billFrom}
+                      type="text"
+                      name="billFrom"
+                      onChange={(event) => this.editField(event)}
+                      autoComplete="name"
+                      required
+                    />
+                    <input
+                      placeholder="Email address"
+                      className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-borderColor rounded-lg"
+                      value={this.state.billFromEmail}
+                      type="email"
+                      name="billFromEmail"
+                      onChange={(event) => this.editField(event)}
+                      autoComplete="email"
+                      required
+                    />
+                    <input
+                      placeholder="Billing address"
+                      className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-borderColor rounded-lg"
+                      value={this.state.billFromAddress}
+                      type="text"
+                      name="billFromAddress"
+                      onChange={(event) => this.editField(event)}
+                      autoComplete="address"
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="d-flex flex-row align-items-center">
-                <span className="fw-bold me-2">Invoice&nbsp;Number:&nbsp;</span>
-                <Form.Control type="number" value={this.state.invoiceNumber} name={"invoiceNumber"} onChange={(event) => this.editField(event)} min="1" style={{
-                    maxWidth: '70px'
-                  }} required="required"/>
+                <InvoiceItem
+                  onItemizedItemEdit={this.onItemizedItemEdit.bind(this)}
+                  onRowAdd={this.handleAddEvent.bind(this)}
+                  onRowDel={this.handleRowDel.bind(this)}
+                  currency={this.state.currency}
+                  items={this.state.items}
+                />
+                <div className="flex flex-end mt-4 justify-content-end">
+                  <div className="col-lg-6">
+                    <div className="flex flex-row items-start justify-between">
+                      <span className="font-bold">Subtotal: </span>
+                      <span>
+                        {this.state.currency}
+                        {this.state.subTotal}
+                      </span>
+                    </div>
+                    <div className="flex flex-row items-start justify-between mt-2">
+                      <span className="font-bold">Discount:</span>
+                      <span>
+                        <span>({this.state.discountRate || 0}%)</span>
+                        {this.state.currency}
+                        {this.state.discountAmmount || 0}
+                      </span>
+                    </div>
+                    <div className="flex flex-row items-start justify-between mt-2">
+                      <span className="font-bold">Tax:</span>
+                      <span>
+                        <span>({this.state.taxRate || 0}%)</span>
+                        {this.state.currency}
+                        {this.state.taxAmmount || 0}
+                      </span>
+                    </div>
+                    <hr />
+                    <div className="flex font-xl flex-row items-start justify-between">
+                      <span className="font-bold">Total:</span>
+                      <span className="font-bold">
+                        {this.state.currency}
+                        {this.state.total || 0}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <hr className="my-4" />
+                <label className="font-bold">Notes:</label>
+                <textarea
+                  placeholder="Thanks for your business!"
+                  name="notes"
+                  value={this.state.notes}
+                  onChange={(event) => this.editField(event)}
+                  className="my-2 block w-full placeholder:text-gray-600 bg-borderColor rounded-sm p-2"
+                  rows="2"
+                />
               </div>
             </div>
-            <hr className="my-4"/>
-            <Row className="mb-5">
-              <Col>
-                <Form.Label className="fw-bold">Bill to:</Form.Label>
-                <Form.Control placeholder={"Who is this invoice to?"} maxLength={35} rows={3} value={this.state.billTo} type="text" name="billTo" className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required"/>
-                <Form.Control placeholder={"Email address"} maxLength={35} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required"/>
-                <Form.Control placeholder={"Billing address"} maxLength={35} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required"/>
-              </Col>
-              <Col>
-                <Form.Label className="fw-bold">Bill from:</Form.Label>
-                <Form.Control placeholder={"Who is this invoice from?"} maxLength={35} rows={3} value={this.state.billFrom} type="text" name="billFrom" className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required"/>
-                <Form.Control placeholder={"Email address"} maxLength={35} value={this.state.billFromEmail} type="email" name="billFromEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required"/>
-                <Form.Control placeholder={"Billing address"} maxLength={35} value={this.state.billFromAddress} type="text" name="billFromAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required"/>
-              </Col>
-            </Row>
-            <InvoiceItem onItemizedItemEdit={this.onItemizedItemEdit.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} currency={this.state.currency} items={this.state.items}/>
-            <Row className="mt-4 justify-content-end">
-              <Col lg={6}>
-                <div className="d-flex flex-row align-items-start justify-content-between">
-                  <span className="fw-bold">Subtotal:
-                  </span>
-                  <span>{this.state.currency}
-                    {this.state.subTotal}</span>
+            <div className="flex flex-col col-md-4 col-lg-3">
+              <div className="sticky top-0 pt-md-3 pt-xl-4">
+                <button
+                  type="submit"
+                  className="block w-full bg-primaryColor text-white tracking-wider p-2 rounded-lg"
+                >
+                  Review Invoice
+                </button>
+                <div className="mt-3 mb-3 w-full flex flex-col group">
+                  <label className="font-bold">Currency: </label>
+                  <select
+                    onChange={(event) =>
+                      this.onCurrencyChange({ currency: event.target.value })
+                    }
+                    className="bg-borderColor p-2 rounded-lg items-center my-1 border border-borderColor"
+                    aria-label="Change Currency"
+                  >
+                    <option value="₹">INR (Indian Rupees)</option>
+                    <option value="$">USD (United States Dollar)</option>
+                    <option value="£">GBP (British Pound Sterling)</option>
+                    <option value="¥">JPY (Japanese Yen)</option>
+                    <option value="₿">BTC (Bitcoin)</option>
+                  </select>
                 </div>
-                <div className="d-flex flex-row align-items-start justify-content-between mt-2">
-                  <span className="fw-bold">Discount:</span>
-                  <span>
-                    <span className="small ">({this.state.discountRate || 0}%)</span>
-                    {this.state.currency}
-                    {this.state.discountAmmount || 0}</span>
+                <div className="my-3">
+                  <label className="font-bold">Tax rate:</label>
+                  <div className="my-1 flex flex-nowrap group">
+                    <input
+                      name="taxRate"
+                      type="number"
+                      value={this.state.taxRate}
+                      onChange={(event) => this.editField(event)}
+                      className="w-[90%] p-2 bg-white border border-r-0 border-borderColor rounded-l-md"
+                      placeholder="0.0"
+                      min="0.00"
+                      step="0.01"
+                      max="100.00"
+                    />
+                    <span className="bg-gray-50 w-[11%] border rounded-r-md border-borderColor p-1 font-bold text-gray-500 flex items-center justify-center">
+                      %
+                    </span>
+                  </div>
                 </div>
-                <div className="d-flex flex-row align-items-start justify-content-between mt-2">
-                  <span className="fw-bold">Tax:
-                  </span>
-                  <span>
-                    <span className="small ">({this.state.taxRate || 0}%)</span>
-                    {this.state.currency}
-                    {this.state.taxAmmount || 0}</span>
+                <div className="my-3">
+                  <label className="font-bold">Discount rate:</label>
+                  <div className="my-1 flex flex-nowrap group">
+                    <input
+                      className="w-[90%] p-2 bg-white border border-r-0 border-borderColor rounded-l-md"
+                      type="number"
+                      name="discountRate"
+                      value={this.state.discountRate}
+                      onChange={(event) => this.editField(event)}
+                      placeholder="0.0"
+                      min="0.00"
+                      step="0.01"
+                      max="100.00"
+                    />
+                    <span class="bg-gray-50 w-[11%] border rounded-r-md border-borderColor p-1 font-bold text-secondary flex items-center justify-center">
+                      %
+                    </span>
+                  </div>
                 </div>
-                <hr/>
-                <div className="d-flex flex-row align-items-start justify-content-between" style={{
-                    fontSize: '1.125rem'
-                  }}>
-                  <span className="fw-bold">Total:
-                  </span>
-                  <span className="fw-bold">{this.state.currency}
-                    {this.state.total || 0}</span>
-                </div>
-              </Col>
-            </Row>
-            <hr className="my-4"/>
-            <Form.Label className="fw-bold">Notes:</Form.Label>
-            <Form.Control placeholder="Thanks for your business!" name="notes" value={this.state.notes} onChange={(event) => this.editField(event)} as="textarea" className="my-2" rows={1}/>
-          </Card>
-        </Col>
-        <Col md={4} lg={3}>
-          <div className="sticky-top pt-md-3 pt-xl-4">
-            <Button type="submit" className="d-block w-100">Review Invoice</Button>
-            <InvoiceModal showModal={this.state.isOpen} closeModal={this.closeModal} info={this.state} items={this.state.items} currency={this.state.currency} subTotal={this.state.subTotal} taxAmmount={this.state.taxAmmount} discountAmmount={this.state.discountAmmount} total={this.state.total}/>
-            <Form.Group className="mb-3">
-              <Form.Label className="fw-bold">Currency:</Form.Label>
-              <Form.Select onChange={event => this.onCurrencyChange({currency: event.target.value})} className="btn btn-light my-1" aria-label="Change Currency">
-                <option value="₹">INR (Indian Rupees)</option>
-                <option value="$">USD (United States Dollar)</option>
-                <option value="£">GBP (British Pound Sterling)</option>
-                <option value="¥">JPY (Japanese Yen)</option>
-                <option value="₿">BTC (Bitcoin)</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="my-3">
-              <Form.Label className="fw-bold">Tax rate:</Form.Label>
-              <InputGroup className="my-1 flex-nowrap">
-                <Form.Control name="taxRate" type="number" value={this.state.taxRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00"/>
-                <InputGroup.Text className="bg-light fw-bold text-secondary small">
-                  %
-                </InputGroup.Text>
-              </InputGroup>
-            </Form.Group>
-            <Form.Group className="my-3">
-              <Form.Label className="fw-bold">Discount rate:</Form.Label>
-              <InputGroup className="my-1 flex-nowrap">
-                <Form.Control name="discountRate" type="number" value={this.state.discountRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00"/>
-                <InputGroup.Text className="bg-light fw-bold text-secondary small">
-                  %
-                </InputGroup.Text>
-              </InputGroup>
-            </Form.Group>
+              </div>
+            </div>
           </div>
-        </Col>
-      </Row>
-    </Form>
-  )}
+        </form>
+      </div>
+        
+        {
+          this.state.isOpen && (
+            <div className='w-full h-full bg-[#0000007F] z-10 top-0 right-0 left-0 bottom-0 fixed items-center justify-center flex' onClick={this.closeModal}>
+              <InvoiceModal
+                  showModal={this.state.isOpen}
+                  closeModal={this.closeModal}
+                  info={this.state}
+                  items={this.state.items}
+                  currency={this.state.currency}
+                  subTotal={this.state.subTotal}
+                  taxAmmount={this.state.taxAmmount}
+                  discountAmmount={this.state.discountAmmount}
+                  total={this.state.total}
+              />
+            </div>
+          )
+        }
+      </>
+    );
+  }
 }
 
 export default InvoiceForm;

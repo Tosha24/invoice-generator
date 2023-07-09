@@ -1,23 +1,23 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import clsx from 'clsx';
 
 class EditableField extends React.Component {
   render() {
     return (
-      <InputGroup className="my-1 flex-nowrap">
+      <div className="my-1 flex flex-nowrap group">
         {
           this.props.cellData.leading != null &&
-          <InputGroup.Text
-            className="bg-light fw-bold border-0 text-secondary px-2">
+          <div
+            className="bg-borderColor font-bold border-0 rounded-l-lg text-secondary px-2 flex items-center justify-center">
             <span className="border border-secondary rounded-circle d-flex align-items-center justify-content-center small" style={{width: '20px', height: '20px'}}>
               {this.props.cellData.leading}
             </span>
-          </InputGroup.Text>
+          </div>
         }
-        <Form.Control
-          className={this.props.cellData.textAlign}
+        <input
+          className={clsx(`w-full border p-[6px] text-md rounded-lg`,
+          `${this.props.cellData.textAlign}`,
+          this.props.cellData.leading != null && "rounded-none rounded-r-lg")}
           type={this.props.cellData.type}
           placeholder={this.props.cellData.placeholder}
           min={this.props.cellData.min}
@@ -30,7 +30,7 @@ class EditableField extends React.Component {
           onChange={this.props.onItemizedItemEdit}
           required
         />
-      </InputGroup>
+      </div>
     );
   }
 }

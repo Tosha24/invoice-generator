@@ -8,12 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#2E86DE',
+        primaryColor: '#742099',
+        hoverColor: '#4a044e',
+        borderColor: '#f3f4f6',
+        lightColor: '#d946ef',
       },
       fontFamily:{
-        titleFont: 'Noto Sans, sans-serif',
-        bodyFont: 'Noto Sans JP, sans-serif',
-      }
+        titleFont: ["Noto Sans", "sans-serif"],
+        bodyFont: ["Noto Sans JP", "sans-serif"],
+      },
     },
   },
   plugins: [],

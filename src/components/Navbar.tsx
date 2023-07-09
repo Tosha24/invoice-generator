@@ -5,15 +5,14 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="w-full bg-blue-100 sticky h-20 lg:h-[12vh] top-0 z-50 px-4">
+    <div className="w-full bg-white sticky h-20 lg:h-[12vh] top-0 z-50 px-4">
       <div className="max-w-container h-full mx-auto py-1 font-titleFont flex items-center justify-between">
         <div className="inline-flex items-center justify-center gap-4">
-          <Image src={logo} alt="logo" className='w-28 mx-3'/>
+          <Image src={logo} alt="logo" className='w-48 mx-2 md:mx-8'/>
         </div>
-        <div className="inline-flex items-center absolute right-9">
-          <Link href='/login'
-          >
-            <button className="px-4 py-2 rounded-md text-primary text-[15px] border border-primary font-bold hover:bg-fuchsia-600 duration-300">
+        <div className="inline-flex items-center absolute right-4 md:right-9">
+          <Link href='/login'>
+            <button className="px-4 py-2 rounded-md text-primaryColor text-[15px] border border-primaryColor font-bold hover:bg-primaryColor hover:text-white duration-300">
               LOGIN
             </button>
           </Link>

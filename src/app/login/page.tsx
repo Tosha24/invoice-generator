@@ -7,6 +7,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
 
 const Login = () => {
   const [isLoading, setLoading] = useState(false);
@@ -34,16 +35,12 @@ const Login = () => {
         toast.error(response.data.error);
       }else{  
         router.push(`profile/${response.data.id}`);
-        setUser({
-          email: "",
-          password: "",
-        })
         toast.success("Login success");
-        setLoading(false);
       }
     } catch (error: any) {
       toast.error(error.message);
-    } finally {
+    }
+    finally{
       setLoading(false);
     }
   };
@@ -51,7 +48,7 @@ const Login = () => {
   return (
     <>
       {isLoading ? (
-        <div> Loading....</div>
+        <Loading/>
       ) : (
         <div className="mt-20 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">

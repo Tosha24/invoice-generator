@@ -7,6 +7,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Loading from "@/components/Loading";
 
 const Signup = () => {
   const [isLoading, setLoading] = useState(false);
@@ -49,7 +50,7 @@ const Signup = () => {
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading/>
       ) : (
         <div className="mt-20 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
@@ -118,7 +119,6 @@ const Signup = () => {
                   disabled={disabled}
                   type="submit"
                   onClick={handleSignup}
-                  danger
                 >
                   Create Account
                 </Button>
@@ -127,7 +127,7 @@ const Signup = () => {
             <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
               <div>Already have an account?</div>
               <div className="underline cursor-pointer hover:text-blue-600">
-                <Link href="/"> Login </Link>
+                <Link href="/login"> Login </Link>
               </div>
             </div>
           </div>
