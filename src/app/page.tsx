@@ -8,7 +8,6 @@ export default function Home() {
     <main className="h-screen w-full overflow-x-hidden overflow-y-scroll m-0 p-0 font-bodyFont">
       <Navbar/>
       <Banner/>
-      {/* This is just a demo */}
     </main>
   )
 }
