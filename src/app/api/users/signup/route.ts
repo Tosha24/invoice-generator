@@ -8,7 +8,7 @@ connect()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const { companyName, email, password } = reqBody
+        const { companyName, email, password, gstin, contact, address, city, state } = reqBody
 
         //check if user already exists
         const user= await User.findOne({email})
@@ -25,7 +25,12 @@ export async function POST(request: NextRequest) {
         const newUser = new User({
             companyName,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            gstin,
+            contact,
+            address,
+            city,
+            state,
         })
 
         const savedUser = await newUser.save()
@@ -34,7 +39,8 @@ export async function POST(request: NextRequest) {
             message: 'User created successfully',
             success: true,
             savedUser
-        })
+        });
+
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 500})
     }

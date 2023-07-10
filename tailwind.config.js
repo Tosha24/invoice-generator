@@ -17,6 +17,9 @@ module.exports = {
         titleFont: ["Noto Sans", "sans-serif"],
         bodyFont: ["Noto Sans JP", "sans-serif"],
       },
+      boxShadow: {
+        shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+      }
     },
   },
   plugins: [],

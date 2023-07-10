@@ -14,27 +14,27 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
     },
-    // gstin: {
-    //     type: String,
-    //     required: [true, "Please provide your GSTIN"],
-    //     unique: true,
-    // },
-    // phone: {
-    //     type: Number,
-    //     required: [true, "Please provide your contact number"],
-    // },
-    // address: {
-    //     type: String,
-    //     required: [false, "Please provide your address"],
-    // },
-    // city: {
-    //     type: String,
-    //     required: [false, "Please provide your city"],
-    // },
-    // state: {
-    //     type: String,
-    //     required: [false, "Please provide your state"],
-    // },
+    gstin: {
+        type: String,
+        required: [true, "Please provide your GSTIN"],
+        unique: true,
+    },
+    contact: {
+        type: Number,
+        required: [true, "Please provide your contact number"],
+    },
+    address: {
+        type: String,
+        required: [false, "Please provide your address"],
+    },
+    city: {
+        type: String,
+        required: [false, "Please provide your city"],
+    },
+    state: {
+        type: String,
+        required: [false, "Please provide your state"],
+    },
     isVerified: {
         type: Boolean,
         default: false,
