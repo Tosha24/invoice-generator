@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import invoice from "/public/assets/images/invoice.jpg";
+import '@/app/globals.css'
+import banner_vector from "/public/assets/images/banner_vector.png";
 
 const Banner = () => {
   return (
@@ -26,8 +27,8 @@ const Banner = () => {
         </button>
       </Link>
       </div>
-      <div className='hidden lg:inline-flex'>
-        <Image src={invoice} alt="bg" />
+      <div className='hidden lg:inline-flex ml-12 mt-6 animate-bounce-slow'>
+        <Image src={banner_vector} alt="bg" height={300} width={550}/>
       </div>
     </section>
   );

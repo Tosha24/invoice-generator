@@ -11,8 +11,8 @@ const Logout = () => {
         try{
             setIsLoading(true);
             await axios.get('/api/users/logout');
-            toast.success("Logout successfully");
-            router.push('/login');
+            toast.success("Logged-out successfully!");
+            router.push('/');
 
         }catch(error: any){
             console.log(error.message);
@@ -26,7 +26,7 @@ const Logout = () => {
   return (
     <button
       onClick={handleLogout}
-      className="block w-full bg-red-500 text-white tracking-wider py-2 rounded-lg"
+      className="block w-full bg-red-600 text-white text-lg tracking-widest py-2 rounded-lg hover:bg-red-800 duration-300"
     >
       {isLoading ? "Logging out..." : "Logout"}
     </button>

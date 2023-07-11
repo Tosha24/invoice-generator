@@ -19,7 +19,17 @@ module.exports = {
       },
       boxShadow: {
         shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;"
-      }
+      },
+      screens: {
+        xxs: "320px",
+        xs: "425px",
+        smx: "520px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        xxl: "1536px",
+      },
     },
   },
   plugins: [],
