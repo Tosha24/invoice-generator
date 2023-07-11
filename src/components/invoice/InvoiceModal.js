@@ -28,6 +28,8 @@ class InvoiceModal extends React.Component {
     super(props);
   }
   render() {
+    const user = this.props.user;
+
     const formattedDate = format(
       new Date(this.props.info.dateOfIssue),
       "dd/MM/yyyy"
@@ -40,7 +42,7 @@ class InvoiceModal extends React.Component {
               <div className="w-100">
                 <h4 className="fw-bold my-2 text-[50px] text-black">
                   {" "}
-                  {this.props.info.billFrom}
+                  {user.data.companyName}
                 </h4>
                 <h6 className="fw-bold text-secondary mb-1 text-black">
                   Invoice : {this.props.info.invoiceNumber || ""}
@@ -62,13 +64,17 @@ class InvoiceModal extends React.Component {
                   <div className="fw-bold">Billed to:</div>
                   <div>{this.props.info.billTo || ""}</div>
                   <div>{this.props.info.billToAddress || ""}</div>
+                  <div>{this.props.info.billToCity || ""}</div>
+                  <div>{this.props.info.billToState || ""}</div>
                   <div>{this.props.info.billToEmail || ""}</div>
                 </div>
                 <div className="flex flex-col cols-md-4">
                   <div className="fw-bold">Billed From:</div>
-                  <div>{this.props.info.billFrom || ""}</div>
-                  <div>{this.props.info.billFromAddress || ""}</div>
-                  <div>{this.props.info.billFromEmail || ""}</div>
+                  <div>{user.data.companyName || ""}</div>
+                  <div>{user.data.address || ""}</div>
+                  <div>{user.data.city || ""}</div>
+                  <div>{user.data.state || ""}</div>
+                  <div>{user.data.email || ""}</div>
                 </div>
                 <div className="flex flex-col cols-md-4">
                   <div className="fw-bold mt-2 text-[16px]">Date Of Issue:</div>

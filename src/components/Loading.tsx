@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { HashLoader } from 'react-spinners';
 
-const Loading = () => {
+interface Props {
+    message?: string;
+}
+
+const Loading = ({message} : Props) => {
     const [ishydrated, setHydrated] = useState(false);
 
     const quotes = [
@@ -29,7 +33,7 @@ const Loading = () => {
         <div className='max-w-container flex flex-col items-center justify-center my-[35vh]'>
             <HashLoader color="#742099" />
             <div className='my-5'>
-                {ishydrated ? quote : ''}
+                {ishydrated ? message ? message : quote : ''}
             </div>
         </div>
     )
