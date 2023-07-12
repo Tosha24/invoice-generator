@@ -203,7 +203,17 @@ class InvoiceForm extends React.Component {
                           type="text"
                           name="billTo"
                           onChange={(event) => this.editField(event)}
-                          autoComplete="name"
+                          autoComplete="off"
+                          required
+                        />
+                        <input
+                          placeholder="Billing GSTIN No."
+                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
+                          value={this.state.gstin}
+                          type="text"
+                          name="gsting"
+                          onChange={(event) => this.editField(event)}
+                          autoComplete="off"
                           required
                         />
                         <input
@@ -213,7 +223,7 @@ class InvoiceForm extends React.Component {
                           type="email"
                           name="billToEmail"
                           onChange={(event) => this.editField(event)}
-                          autoComplete="email"
+                          autoComplete="off"
                           required
                         />
                         <input
@@ -223,7 +233,8 @@ class InvoiceForm extends React.Component {
                           type="text"
                           name="billToAddress"
                           onChange={(event) => this.editField(event)}
-                          autoComplete="address"
+                          autoComplete="off"
+                          maxLength={50}
                           required
                         />
                         <input
@@ -233,7 +244,7 @@ class InvoiceForm extends React.Component {
                           type="text"
                           name="billToCity"
                           onChange={(event) => this.editField(event)}
-                          autoComplete="city"
+                          autoComplete="off"
                           required
                         />
                         <input
@@ -243,7 +254,7 @@ class InvoiceForm extends React.Component {
                           type="text"
                           name="billToState"
                           onChange={(event) => this.editField(event)}
-                          autoComplete="state"
+                          autoComplete="off"
                           required
                         />
                       </div>
@@ -255,6 +266,14 @@ class InvoiceForm extends React.Component {
                           value={user.data.companyName}
                           type="text"
                           name="billFrom"
+                          disabled
+                        />
+                        <input
+                          placeholder="GSTIN No."
+                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-white border border-borderColor rounded-lg"
+                          value={user.data.gstin}
+                          type="text"
+                          name="gstin"
                           disabled
                         />
                         <input
@@ -342,6 +361,7 @@ class InvoiceForm extends React.Component {
                       onChange={(event) => this.editField(event)}
                       className="my-2 block w-full placeholder:text-gray-600 bg-borderColor rounded-sm p-2"
                       rows="2"
+                      autoComplete="off"
                     />
                   </div>
                 </div>

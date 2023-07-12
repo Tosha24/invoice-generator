@@ -6,27 +6,27 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { format } from "date-fns";
 
-function GenerateInvoice() {
-  html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
-    const imgData = canvas.toDataURL("image/png", 1.0);
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "pt",
-      format: [612, 792],
-    });
-    pdf.internal.scaleFactor = 1;
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("invoice-001.pdf");
-  });
-}
-
 class InvoiceModal extends React.Component {
   constructor(props) {
     super(props);
   }
+  GenerateInvoice = () => {
+    html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png", 1.0);
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "pt",
+        format: [612, 792],
+      });
+      pdf.internal.scaleFactor = 1;
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${this.props.info.billTo}-invoice.pdf`);
+    });
+  }
+
   render() {
     const user = this.props.user;
 
@@ -171,7 +171,7 @@ class InvoiceModal extends React.Component {
             <div className="flex flex-col cols-md-6 w-full">
               <button
                 className="flex mx-auto max-w-fit mt-3 mt-md-0 bg-primaryColor items-center px-4 p-2 rounded-lg text-white"
-                onClick={GenerateInvoice}
+                onClick={this.GenerateInvoice}
               >
                 <BiCloudDownload className="mr-2 text-4xl mt-[-3px]" />
                 Download Copy

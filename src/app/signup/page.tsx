@@ -70,9 +70,9 @@ const Signup = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="w-full h-screen overflow-x-hidden p-16">
+        <div className="w-full h-screen overflow-x-hidden pt-16 md:p-16">
           <div className="h-full md:flex md:flex-row">
-            <div className="hidden md:inline-flex w-full p-10">
+            <div className="hidden md:inline-flex md:w-full md:p-10">
               <div className="h-full w-full p-10 flex flex-col gap-10 bg-primaryColor rounded-lg">
                 <span className="text-4xl font-semibold font-titleFont text-white text-center">
                   {" "}
@@ -129,6 +129,7 @@ const Signup = () => {
                         onChange={(e) =>
                           setUser({ ...user, gstin: e.target.value })
                         }
+                        autoComplete="off"
                         required
                       />
                     </div>
@@ -150,6 +151,7 @@ const Signup = () => {
                             contact: parseInt(e.target.value),
                           })
                         }
+                        autoComplete="off"
                       />
                     </div>
                     <label
@@ -167,6 +169,8 @@ const Signup = () => {
                         onChange={(e) =>
                           setUser({ ...user, address: e.target.value })
                         }
+                        maxLength={50}
+                        autoComplete="off"
                       />
                     </div>
                     <label
@@ -184,6 +188,7 @@ const Signup = () => {
                         onChange={(e) =>
                           setUser({ ...user, city: e.target.value })
                         }
+                        autoComplete="off"
                       />
                     </div>
                     <label
@@ -201,6 +206,7 @@ const Signup = () => {
                         onChange={(e) =>
                           setUser({ ...user, state: e.target.value })
                         }
+                        autoComplete="off"
                       />
                     </div>
                   </div>
@@ -222,6 +228,7 @@ const Signup = () => {
                           setUser({ ...user, companyName: e.target.value })
                         }
                         required
+                        autoComplete="off"
                       />
                     </div>
                     <label
@@ -239,6 +246,7 @@ const Signup = () => {
                         onChange={(e) =>
                           setUser({ ...user, email: e.target.value })
                         }
+                        autoComplete="off"
                         required
                       />
                     </div>
