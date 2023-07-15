@@ -441,8 +441,7 @@ class InvoiceForm extends React.Component {
 
         {this.state.isOpen && (
           <div
-            className="w-full h-full bg-[#0000007F] z-10 top-0 right-0 left-0 bottom-0 fixed items-center justify-center flex"
-            onClick={this.closeModal}
+            className="w-full h-full bg-[#0000007F] z-10 top-0 right-0 left-0 bottom-0 fixed items-center justify-center flex overflow-y-scroll scrollbar-none pt-24"
           >
             <InvoiceModal
               showModal={this.state.isOpen}
