@@ -118,6 +118,7 @@ class ItemRow extends React.Component {
                 placeholder: "Item description",
                 value: this.props.item.description,
                 id: this.props.item.id,
+                maxLength: 80,
               }}
             />
           </td>

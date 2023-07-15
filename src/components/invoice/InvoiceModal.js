@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import { format } from "date-fns";
 import { RiSave3Fill } from "react-icons/ri";
 import { FaPencilAlt } from "react-icons/fa";
+import Loading from "../Loading";
 
 class InvoiceModal extends React.Component {
   constructor(props) {
@@ -26,6 +27,9 @@ class InvoiceModal extends React.Component {
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
       pdf.save(`${this.props.info.billTo}-invoice.pdf`);
+    }).then(() => {
+      this.props.closeModal();
+      window.location.reload();
     });
   };
 
@@ -71,7 +75,8 @@ class InvoiceModal extends React.Component {
                   <div>{this.props.info.billToAddress || ""},</div>
                   <div>{this.props.info.billToCity || ""},</div>
                   <div>{this.props.info.billToState || ""}.</div>
-                  <div className='italic underline'>{this.props.info.billToEmail || ""}</div>
+                  <div className='flex flex-row mt-1'><span className='underline underline-offset-2 decoration-1'>Email</span>:&nbsp;<span className='italic'>{this.props.info.billToEmail || ""}</span></div>
+                  <div className='flex flex-row'><span className='underline underline-offset-2 decoration-1'>Contact</span>:&nbsp;<span>{this.props.info.billToContact || ""}</span></div>
                 </div>
                 <div className="flex flex-col cols-md-4 w-full">
                   <div className="fw-bold">Billed From:</div>
@@ -79,7 +84,8 @@ class InvoiceModal extends React.Component {
                   <div>{user.data.address || ""},</div>
                   <div>{user.data.city || ""},</div>
                   <div>{user.data.state || ""}.</div>
-                  <div className='italic underline'>{user.data.email || ""}</div>
+                  <div className='flex flex-row mt-1'><span className='underline underline-offset-2 decoration-1'>Email</span>:&nbsp;<span className='italic'> {user.data.email || ""}</span></div>
+                  <div className='flex flex-row'><span className='underline underline-offset-2 decoration-1'>Contact</span>:&nbsp;<span> {user.data.contact || ""}</span></div>
                 </div> 
               </div>
               <table className="mb-0 w-full border border-collapse">
@@ -96,8 +102,8 @@ class InvoiceModal extends React.Component {
                   {this.props.items.map((item, i) => {
                     return (
                       <tr id={i} key={i} style={{ height: "35px" }} className="border-b-2">
-                        <td style={{ width: "30px" }} className=" text-center">1</td>
-                        <td className='break-all border-l-2 border-r-2 pl-2 pr-4'>
+                        <td style={{ width: "30px" }} className=" text-center">{i+1}</td>
+                        <td className='break-all border-l-2 border-r-2 pl-2 pr-4 pb-2'>
                           <span className='font-bold'>{item.name}</span> <br/> <span className='text-sm'>{item.description}</span>
                         </td>
                         <td style={{ width: "70px" }} className=" text-center">{item.quantity}</td>
@@ -121,41 +127,41 @@ class InvoiceModal extends React.Component {
                   </tr>
                   <tr className="text-end">
                     <td></td>
-                    <td className="fw-bold" style={{ width: "100px" }}>
+                    <td className="fw-bold pr-2" style={{ width: "100px" }}>
                       SUBTOTAL
                     </td>
-                    <td className="text-end" style={{ width: "100px" }}>
+                    <td className="text-end min-w-fit">
                       {this.props.currency} {this.props.subTotal}
                     </td>
                   </tr>
                   {this.props.taxAmmount != 0.0 && (
                     <tr className="text-end">
                       <td></td>
-                      <td className="fw-bold" style={{ width: "100px" }}>
+                      <td className="fw-bold pr-2" style={{ width: "100px" }}>
                         TAX
                       </td>
-                      <td className="text-end" style={{ width: "100px" }}>
-                        {this.props.currency} {this.props.taxAmmount}
+                      <td className="text-end min-w-fit">
+                        ({this.props.taxRate}%)&nbsp;{this.props.currency}&nbsp;{this.props.taxAmmount}
                       </td>
                     </tr>
                   )}
                   {this.props.discountAmmount != 0.0 && (
                     <tr className="text-end">
                       <td></td>
-                      <td className="fw-bold" style={{ width: "100px" }}>
+                      <td className="fw-bold border-b-2 pb-2 pr-2" style={{ width: "100px" }}>
                         DISCOUNT
                       </td>
-                      <td className="text-end" style={{ width: "100px" }}>
-                        {this.props.currency} {this.props.discountAmmount}
+                      <td className="text-end border-b-2 pb-2 min-w-fit">
+                        ({this.props.discountRate}%)&nbsp;{this.props.currency}&nbsp;{this.props.discountAmmount}
                       </td>
                     </tr>
                   )}
                   <tr className="text-end">
                     <td></td>
-                    <td className="fw-bold" style={{ width: "100px" }}>
+                    <td className="fw-bold pr-2" style={{ width: "100px" }}>
                       TOTAL
                     </td>
-                    <td className="text-end" style={{ width: "100px" }}>
+                    <td className="text-end" style={{ width: "200px" }}>
                       {this.props.currency} {this.props.total}
                     </td>
                   </tr>

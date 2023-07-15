@@ -29,6 +29,7 @@ class EditableField extends React.Component {
           aria-label={this.props.cellData.name}
           onChange={this.props.onItemizedItemEdit}
           autoComplete="off"
+          maxLength={this.props.cellData.maxLength}
           required
         />
       </div>

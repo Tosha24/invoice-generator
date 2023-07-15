@@ -1,9 +1,10 @@
 import React from "react";
 import InvoiceItem from "./InvoiceItem";
-import InvoiceModal from "./InvoiceModal";
+import InvoiceModal from "./InvoiceModal.js";
 import moment from "moment";
 import Logout from "@/components/Logout";
 import Loading from "@/components/Loading";
+import { BiSolidPhone } from 'react-icons/bi';
 
 class InvoiceForm extends React.Component {
   constructor(props) {
@@ -14,11 +15,13 @@ class InvoiceForm extends React.Component {
       currentDate: "",
       invoiceNumber: 1,
       dateOfIssue: "",
-      billFrom: "",
-      billFromEmail: "",
-      billFromAddress: "",
-      billFromCity: "",
-      billFromState: "",
+      billTo: "",
+      gstin: "",
+      billToEmail: "",
+      billToAddress: "",
+      billToCity: "",
+      billToState: "",
+      billToContact: 0,
       notes: "",
       total: "0.00",
       subTotal: "0.00",
@@ -174,7 +177,7 @@ class InvoiceForm extends React.Component {
                             value={this.state.dateOfIssue}
                             name="dateOfIssue"
                             onChange={(event) => this.editField(event)}
-                            className="max-w-[150px] pl-4 p-[6px] rounded-lg bg-borderColor"
+                            className="max-w-[150px] pl-4 p-[6px] rounded-lg bg-borderColor border"
                             required
                           />
                         </div>
@@ -183,7 +186,7 @@ class InvoiceForm extends React.Component {
                         <span className="font-bold me-2">Invoice Number: </span>
                         <input
                           type="number"
-                          className="max-w-[70px] bg-borderColor p-[6px] rounded-lg pl-3"
+                          className="max-w-[70px] bg-borderColor p-[6px] rounded-lg pl-3 border"
                           value={this.state.invoiceNumber}
                           name="invoiceNumber"
                           onChange={(event) => this.editField(event)}
@@ -207,25 +210,29 @@ class InvoiceForm extends React.Component {
                           required
                         />
                         <input
-                          placeholder="Billing GSTIN No."
-                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
+                          placeholder="GSTIN"
+                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg uppercase"
                           value={this.state.gstin}
                           type="text"
-                          name="gsting"
+                          name="gstin"
                           onChange={(event) => this.editField(event)}
                           autoComplete="off"
+                          maxLength={15}
                           required
                         />
-                        <input
-                          placeholder="Email address"
-                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
-                          value={this.state.billToEmail}
-                          type="email"
-                          name="billToEmail"
-                          onChange={(event) => this.editField(event)}
-                          autoComplete="off"
-                          required
-                        />
+                        <div className='flex flex-row group'>
+                          <div className='flex items-center justify-center p-1 rounded-l-lg border bg-gray-100 font-semibold'>@</div>
+                          <input
+                            placeholder="Email address"
+                            className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-r-lg"
+                            value={this.state.billToEmail}
+                            type="email"
+                            name="billToEmail"
+                            onChange={(event) => this.editField(event)}
+                            autoComplete="off"
+                            required
+                          />
+                        </div>
                         <input
                           placeholder="Address Line 1"
                           className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
@@ -257,6 +264,22 @@ class InvoiceForm extends React.Component {
                           autoComplete="off"
                           required
                         />
+                        <div className="flex flex-row group">
+                          <div className="items-center justify-center flex bg-gray-100 border rounded-l-lg p-1 font-medium">
+                            <BiSolidPhone/>
+                          </div>
+                          <input
+                            placeholder="Contact"
+                            className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-r-lg"
+                            value={this.state.billToContact}
+                            type="tel"
+                            name="billToContact"
+                            onChange={(event) => this.editField(event)}
+                            maxLength={10}
+                            autoComplete="off"
+                            required
+                          />
+                        </div>
                       </div>
                       <div className="w-full flex flex-col gap-2">
                         <label className="font-bold">Bill from:</label>
@@ -276,14 +299,17 @@ class InvoiceForm extends React.Component {
                           name="gstin"
                           disabled
                         />
-                        <input
+                        <div className='flex flex-row group'>
+                          <div className='flex items-center justify-center p-1 rounded-l-lg border bg-gray-100 font-semibold'>@</div>
+                          <input
                           placeholder="Email address"
-                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-white border border-borderColor rounded-lg"
+                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-white border border-borderColor rounded-r-lg"
                           value={user.data.email}
                           type="email"
                           name="billFromEmail"
                           disabled
                         />
+                        </div>
                         <input
                           placeholder="Billing address"
                           className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-white border border-borderColor rounded-lg"
@@ -308,6 +334,19 @@ class InvoiceForm extends React.Component {
                           name="billFromState"
                           disabled
                         />
+                        <div className="flex flex-row group">
+                          <div className="items-center justify-center flex bg-gray-100 border rounded-l-lg p-1 font-medium">
+                            <BiSolidPhone/>
+                          </div>
+                          <input
+                            placeholder="Contact"
+                            className="w-full placeholder:text-gray-600 pl-3 p-[6px] border border-borderColor bg-white rounded-r-lg"
+                            value={user.data.contact}
+                            type="tel"
+                            name="billFromContact"
+                            disabled
+                          />
+                        </div>
                       </div>
                     </div>
                     <InvoiceItem
@@ -430,7 +469,7 @@ class InvoiceForm extends React.Component {
                       </div>
                     </div>
                     <div className="my-3">
-                      <Logout onStateChange={this.handleStateChange} />
+                      <Logout />
                     </div>
                   </div>
                 </div>
@@ -440,9 +479,7 @@ class InvoiceForm extends React.Component {
         )}
 
         {this.state.isOpen && (
-          <div
-            className="w-full h-full bg-[#0000007F] z-10 top-0 right-0 left-0 bottom-0 fixed items-center justify-center flex overflow-y-scroll scrollbar-none pt-24"
-          >
+          <div className="w-full h-full bg-[#0000007F] z-10 top-0 right-0 left-0 bottom-0 fixed items-center justify-center flex overflow-y-scroll scrollbar-none pt-24">
             <InvoiceModal
               showModal={this.state.isOpen}
               closeModal={this.closeModal}
@@ -452,6 +489,8 @@ class InvoiceForm extends React.Component {
               subTotal={this.state.subTotal}
               taxAmmount={this.state.taxAmmount}
               discountAmmount={this.state.discountAmmount}
+              taxRate={this.state.taxRate}
+              discountRate={this.state.discountRate}
               total={this.state.total}
               user={user}
             />

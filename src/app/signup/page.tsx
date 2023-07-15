@@ -123,13 +123,14 @@ const Signup = () => {
                     <div className="mt-2">
                       <input
                         type="text"
-                        value={user.gstin}
+                        value={user.gstin.toUpperCase()}
                         id="gstin"
                         className="form-input block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-fuchsia-900 sm:text-sm sm:leading-6"
                         onChange={(e) =>
                           setUser({ ...user, gstin: e.target.value })
                         }
                         autoComplete="off"
+                        maxLength={15}
                         required
                       />
                     </div>
@@ -141,8 +142,8 @@ const Signup = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        type="number"
-                        value={user.contact}
+                        type="tel"
+                        value={user.contact ? user.contact : 0}
                         id="contact"
                         className="form-input block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-fuchsia-900 sm:text-sm sm:leading-6"
                         onChange={(e) =>
@@ -151,8 +152,9 @@ const Signup = () => {
                             contact: parseInt(e.target.value),
                           })
                         }
+                        maxLength={10}
                         autoComplete="off"
-                      />
+                      />  
                     </div>
                     <label
                       className="block text-sm font-medium leading-6 text-gray-900"

@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         primaryColor: '#742099',
         hoverColor: '#4a044e',
-        borderColor: '#f3f4f6',
+        borderColor: '#f9fafb',
         lightColor: '#d946ef',
       },
       fontFamily:{
