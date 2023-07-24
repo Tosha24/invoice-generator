@@ -25,15 +25,15 @@ const userSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        required: [false, "Please provide your address"],
+        required: [true, "Please provide your address"],
     },
     city: {
         type: String,
-        required: [false, "Please provide your city"],
+        required: [true, "Please provide your city"],
     },
     state: {
         type: String,
-        required: [false, "Please provide your state"],
+        required: [true, "Please provide your state"],
     },
     isVerified: {
         type: Boolean,

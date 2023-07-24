@@ -220,19 +220,7 @@ class InvoiceForm extends React.Component {
                           maxLength={15}
                           required
                         />
-                        <div className='flex flex-row group'>
-                          <div className='flex items-center justify-center p-1 rounded-l-lg border bg-gray-100 font-semibold'>@</div>
-                          <input
-                            placeholder="Email address"
-                            className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-r-lg"
-                            value={this.state.billToEmail}
-                            type="email"
-                            name="billToEmail"
-                            onChange={(event) => this.editField(event)}
-                            autoComplete="off"
-                            required
-                          />
-                        </div>
+                        
                         <input
                           placeholder="Address Line 1"
                           className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
@@ -264,6 +252,19 @@ class InvoiceForm extends React.Component {
                           autoComplete="off"
                           required
                         />
+                        <div className='flex flex-row group'>
+                          <div className='flex items-center justify-center p-1 rounded-l-lg border bg-gray-100 font-semibold'>@</div>
+                          <input
+                            placeholder="Email address"
+                            className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-r-lg"
+                            value={this.state.billToEmail}
+                            type="email"
+                            name="billToEmail"
+                            onChange={(event) => this.editField(event)}
+                            autoComplete="off"
+                            required
+                          />
+                        </div>
                         <div className="flex flex-row group">
                           <div className="items-center justify-center flex bg-gray-100 border rounded-l-lg p-1 font-medium">
                             <BiSolidPhone/>
@@ -299,17 +300,7 @@ class InvoiceForm extends React.Component {
                           name="gstin"
                           disabled
                         />
-                        <div className='flex flex-row group'>
-                          <div className='flex items-center justify-center p-1 rounded-l-lg border bg-gray-100 font-semibold'>@</div>
-                          <input
-                          placeholder="Email address"
-                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-white border border-borderColor rounded-r-lg"
-                          value={user.data.email}
-                          type="email"
-                          name="billFromEmail"
-                          disabled
-                        />
-                        </div>
+                        
                         <input
                           placeholder="Billing address"
                           className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-white border border-borderColor rounded-lg"
@@ -334,6 +325,17 @@ class InvoiceForm extends React.Component {
                           name="billFromState"
                           disabled
                         />
+                        <div className='flex flex-row group'>
+                          <div className='flex items-center justify-center p-1 rounded-l-lg border bg-gray-100 font-semibold'>@</div>
+                          <input
+                          placeholder="Email address"
+                          className="w-full placeholder:text-gray-600 pl-3 p-[6px] bg-white border border-borderColor rounded-r-lg"
+                          value={user.data.email}
+                          type="email"
+                          name="billFromEmail"
+                          disabled
+                        />
+                        </div>
                         <div className="flex flex-row group">
                           <div className="items-center justify-center flex bg-gray-100 border rounded-l-lg p-1 font-medium">
                             <BiSolidPhone/>
