@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
             email,
             password: hashedPassword,
             gstin,
-            contact,
+            contact: Number(contact),
             address,
             city,
             state,

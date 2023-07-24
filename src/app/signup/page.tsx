@@ -26,7 +26,7 @@ const Signup = () => {
     email: "",
     password: "",
     gstin: "",
-    contact: 0,
+    contact: "",
     address: "",
     city: "",
     state: "",
@@ -59,8 +59,8 @@ const Signup = () => {
         user.city.length > 0 &&
         user.gstin.length == 15 &&
         user.state.length > 0 &&
-        user.contact.toString().length >= 8 &&
-        user.contact.toString().length <= 15
+        user.contact.length >= 8 &&
+        user.contact.length <= 15
       ) {
         setDisabled(false);
       } else {
@@ -172,14 +172,14 @@ const Signup = () => {
                       </label>
                       <div className="mt-2">
                         <input
-                          type="tel"
-                          value={user.contact ? user.contact : 0}
+                          type="text"
+                          value={user.contact}
                           id="contact"
                           className="form-input block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-fuchsia-900 sm:text-sm sm:leading-6"
                           onChange={(e) =>
                             setUser({
                               ...user,
-                              contact: parseInt(e.target.value),
+                              contact: e.target.value,
                             })
                           }
                           maxLength={10}
