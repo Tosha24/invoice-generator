@@ -21,7 +21,7 @@ class InvoiceForm extends React.Component {
       billToAddress: "",
       billToCity: "",
       billToState: "",
-      billToContact: 0,
+      billToContact: String(""),
       notes: "",
       total: "0.00",
       subTotal: "0.00",
@@ -157,8 +157,8 @@ class InvoiceForm extends React.Component {
         ) : (
           <div>
             <form onSubmit={this.openModal}>
-              <div className="flex flex-row gap-4">
-                <div className="flex flex-col col-md-8 col-lg-9">
+              <div className="flex flex-row gap-4 items-start justify-center">
+                <div className="flex flex-col col-md-6 col-lg-9">
                   <div className="border border-gray-200 rounded-lg p-4 p-xl-5 my-3 my-xl-4">
                     <div className="flex flex-row items-start justify-between mb-3">
                       <div className="flex flex-col">
@@ -406,8 +406,8 @@ class InvoiceForm extends React.Component {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col col-md-4 col-lg-3">
-                  <div className="sticky top-0 pt-md-3 pt-xl-4">
+                <div className="flex flex-col col-md-4 col-lg-2">
+                  <div className="fixed pt-md-3 pt-xl-4">
                     <button
                       type="submit"
                       className="block w-full bg-primaryColor hover:bg-hoverColor text-lg text-white tracking-wider py-2 rounded-lg"
@@ -469,9 +469,6 @@ class InvoiceForm extends React.Component {
                           %
                         </span>
                       </div>
-                    </div>
-                    <div className="my-3">
-                      <Logout />
                     </div>
                   </div>
                 </div>
