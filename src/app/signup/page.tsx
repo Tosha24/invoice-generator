@@ -161,7 +161,7 @@ const Signup = () => {
                           }
                           autoComplete="off"
                           maxLength={15}
-                          required
+                          required  
                         />
                       </div>
                       <label
