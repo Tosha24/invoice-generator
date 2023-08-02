@@ -2,7 +2,6 @@ import React from "react";
 import InvoiceItem from "./InvoiceItem";
 import InvoiceModal from "./InvoiceModal.js";
 import moment from "moment";
-import Logout from "@/components/Logout";
 import Loading from "@/components/Loading";
 import { BiSolidPhone } from 'react-icons/bi';
 
@@ -142,12 +141,6 @@ class InvoiceForm extends React.Component {
   };
   closeModal = (event) => this.setState({ isOpen: false });
 
-  handleStateChange = (newValue) => {
-    this.setState({
-      isLoading: newValue,
-    });
-  };
-
   render() {
     const user = this.props.user;
     return (
@@ -165,7 +158,7 @@ class InvoiceForm extends React.Component {
                         <div className="flex flex-col">
                           <div className="mb-2">
                             <span className="font-bold">Current Date: </span>
-                            <span>{moment().format("DD-MM-YYYY")}</span>
+                            <span>{this.state.currentDate = moment().format("DD-MM-YYYY")}</span>
                           </div>
                         </div>
                         <div className="flex flex-row items-center">

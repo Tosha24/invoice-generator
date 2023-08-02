@@ -20,7 +20,6 @@ const Signup = () => {
 
   const router = useRouter();
 
-  // can u wait for sometimes hu Swara ne sikhvadi dau obv can i continue to edit this ? obv
   const [user, setUser] = useState({
     companyName: "",
     email: "",
@@ -33,15 +32,6 @@ const Signup = () => {
   });
 
   useEffect(() => {
-    // if (
-    //   user.companyName.length > 0 &&
-    //   user.email.length > 0 &&
-    //   user.password.length > 6
-    // ) {
-    //   setDisabled(false);
-    // } else {
-    //   setDisabled(true);
-    // }
     if (!nextVariable) {
       if (
         user.companyName.length > 0 &&

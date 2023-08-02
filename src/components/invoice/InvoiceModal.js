@@ -8,10 +8,39 @@ import { format } from "date-fns";
 import { RiSave3Fill } from "react-icons/ri";
 import { FaPencilAlt } from "react-icons/fa";
 import Loading from "../Loading";
+import axios from "axios";
+import { toDate } from "date-fns/esm";
+import { toast } from "react-hot-toast";
 
 class InvoiceModal extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      email: this.props.user.data.email,
+      invoiceNumber: this.props.info.invoiceNumber,
+      issueDate: this.props.info.currentDate,
+      dueDate: this.props.info.dateOfIssue,
+      customerName: this.props.info.billTo,
+      customerEmail: this.props.info.billToEmail,
+      customerGstin: this.props.info.gstin,
+      customerAddress: this.props.info.billToAddress,
+      customerCity: this.props.info.billToCity,
+      customerState: this.props.info.billToState,
+      customerContact: this.props.info.billToContact,
+      currency: this.props.currency,
+      taxRate: Number(this.props.taxRate),
+      discountRate: Number(this.props.discountRate),
+      totalAmount: this.props.total,
+      status: "pending",
+      items: {
+        itemNo: this.props.items.id + 1,
+        itemName: this.props.items.name,
+        itemDescription: this.props.items.description,
+        itemQuantity: this.props.items.quantity,
+        itemRate: Number(this.props.items.price),
+        itemTotal: Number(Number(this.props.items.price) * Number(this.props.items.quantity)),
+      },
+    }
   }
   GenerateInvoice = () => {
     html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
@@ -32,6 +61,20 @@ class InvoiceModal extends React.Component {
       window.location.reload();
     });
   };
+
+  SaveInvoice = async() => {
+    try{
+      const response = await axios.post('/api/users/invoice', this.state);
+      console.log(response);
+      toast.success('Invoice Saved Successfully');
+      this.props.closeModal();
+      window.location.reload();
+    }
+    catch(error) {
+      console.log(error);
+      toast.error('Error while saving invoice!! Please try again later.');
+    }
+  }
 
   render() {
     const user = this.props.user;
@@ -192,7 +235,7 @@ class InvoiceModal extends React.Component {
                 Download Copy
               </button>
               <button
-                className="flex max-w-fit mt-3 mt-md-0 bg-primaryColor items-center px-4 p-2 rounded-lg text-white hover:-translate-y-2 duration-300"
+                className="flex max-w-fit mt-3 mt-md-0 bg-primaryColor items-center px-4 p-2 rounded-lg text-white hover:-translate-y-2 duration-300" onClick={this.SaveInvoice}
               >
                 <RiSave3Fill className="mr-2 mt-[-3px]" />
                 Save Invoice
