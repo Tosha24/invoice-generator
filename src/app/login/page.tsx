@@ -36,7 +36,7 @@ const Login = () => {
         toast.error(response.data.error);
       } else {
         router.push(`profile/${response.data.id}`);
-        toast.success("Logged-in successfully!");
+        toast.success("Logging in successfully!");
       }
     } catch (error: any) {
       toast.error(error.message);
