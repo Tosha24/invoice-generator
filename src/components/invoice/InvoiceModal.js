@@ -19,7 +19,7 @@ class InvoiceModal extends React.Component {
       email: this.props.user.data.email,
       invoiceNumber: this.props.info.invoiceNumber,
       issueDate: this.props.info.currentDate,
-      dueDate: this.props.info.dateOfIssue,
+      dueDate: "",
       customerName: this.props.info.billTo,
       customerEmail: this.props.info.billToEmail,
       customerGstin: this.props.info.gstin,
@@ -32,14 +32,15 @@ class InvoiceModal extends React.Component {
       discountRate: Number(this.props.discountRate),
       totalAmount: this.props.total,
       status: "pending",
-      items: {
-        itemNo: this.props.items.id + 1,
-        itemName: this.props.items.name,
-        itemDescription: this.props.items.description,
-        itemQuantity: this.props.items.quantity,
-        itemRate: Number(this.props.items.price),
-        itemTotal: Number(Number(this.props.items.price) * Number(this.props.items.quantity)),
-      },
+      items: [
+        {
+          id: 0,
+          name: "",
+          description: "",
+          price: 0.00,
+          quantity: 1,
+        },
+      ],
     }
   }
   GenerateInvoice = () => {
@@ -81,8 +82,9 @@ class InvoiceModal extends React.Component {
 
     const formattedDate = format(
       new Date(this.props.info.dateOfIssue),
-      "dd/MM/yyyy"
+      "dd-MM-yyyy"
     );
+    
     return (
       <div className="bg-white w-[80%] min-h-[40%] items-center justify-center">
         <div id="invoiceCapture">
@@ -97,7 +99,7 @@ class InvoiceModal extends React.Component {
                   <h6 className="fw-bold text-secondary text-black">
                     Invoice : {this.props.info.invoiceNumber || ""}
                   </h6>
-                  <h6 className='fw-bold text-secondary text-black'>Due Date:&nbsp;{formattedDate || ""}</h6>
+                  <h6 className='fw-bold text-secondary text-black'>Due Date:&nbsp;{this.state.dueDate = formattedDate || ""}</h6>
                 </div>
               </div>
               <div className="text-end p-4">
