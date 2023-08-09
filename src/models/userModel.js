@@ -71,7 +71,15 @@ const invoiceSchema = {
         required: [false],
         default: "₹",
     },
+    subTotal: {
+        type: Number,
+        required: [false],
+    },
     taxRate: {
+        type: Number,
+        required: [false],
+    },
+    taxAmount: {
         type: Number,
         required: [false],
     },
@@ -83,10 +91,14 @@ const invoiceSchema = {
         type: Number,
         required: [false],
     },
+    discountAmount: {
+        type: Number,
+        required: [false],
+    },
     status: {
         type: String,
         required: [false],
-        default: "Pending",
+        default: "Unpaid",
     },
 }
 

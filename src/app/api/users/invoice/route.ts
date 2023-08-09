@@ -7,7 +7,7 @@ connect()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const { email, invoiceNumber, issueDate, dueDate, customerName, customerEmail, customerGstin, customerAddress, customerCity, customerState, customerContact, currency, taxRate, discountRate, totalAmount, status, items } = reqBody
+        const { email, invoiceNumber, issueDate, dueDate, customerName, customerEmail, customerGstin, customerAddress, customerCity, customerState, customerContact, currency, subTotal, taxRate, taxAmount, discountRate, discountAmount, totalAmount, status, items } = reqBody
 
         //check if user already exists
         const user = await User.findOne({email})
@@ -29,8 +29,11 @@ export async function POST(request: NextRequest) {
             customerState,
             customerContact,
             currency,
+            subTotal,
             taxRate,
+            taxAmount,
             discountRate,
+            discountAmount,
             totalAmount,
             status,
             items,

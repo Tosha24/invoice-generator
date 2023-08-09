@@ -7,9 +7,10 @@ import ShowModal from "./ShowModal";
 
 interface Props {
   user: any;
+  invoice?: any;
 }
 
-const ShowInvoice = ({ user }: Props) => {
+const ShowInvoice = ({ user, invoice }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [localUser, setUser] = useState({
@@ -152,32 +153,30 @@ const ShowInvoice = ({ user }: Props) => {
     <>
       <div>
         <form onSubmit={openModal}>
-          <div className="flex flex-row gap-4 items-start justify-center">
-            <div className="flex flex-col col-md-6 col-lg-9">
-              <div className="border border-gray-200 rounded-lg p-4 p-xl-5 my-3 my-xl-4">
+          <div className="flex flex-row gap-7 items-start justify-center w-full">
+            <div className="flex flex-col md:col-span-6 col-lg-9">
+              <div className="border border-gray-200 rounded-lg p-4 xl:p-5 my-3 xl:my-4">
                 <div className="flex flex-row items-start justify-between mb-3">
                   <div className="flex flex-col">
                     <div className="flex flex-col">
                       <div className="mb-2">
                         <span className="font-bold">Current Date: </span>
                         <span>
-                          {
-                            (localUser.currentDate =
-                              moment().format("DD-MM-YYYY"))
-                          }
+                          {invoice.issueDate}
                         </span>
                       </div>
                     </div>
                     <div className="flex flex-row items-center">
                       <span className="font-bold block mr-2">Due Date: </span>
-                      <input
+                      {/* <input
                         type="date"
                         value={localUser.dateOfIssue}
                         name="dateOfIssue"
                         onChange={(event) => editField(event)}
                         className="max-w-[150px] pl-4 p-[6px] rounded-lg bg-borderColor border"
                         required
-                      />
+                      /> */}
+                      <span>{invoice.dueDate}</span>
                     </div>
                   </div>
                   <div className="flex flex-row items-center">
@@ -185,7 +184,7 @@ const ShowInvoice = ({ user }: Props) => {
                     <input
                       type="number"
                       className="max-w-[70px] bg-borderColor p-[6px] rounded-lg pl-3 border"
-                      value={localUser.invoiceNumber}
+                      value={invoice.invoiceNumber}
                       name="invoiceNumber"
                       onChange={(event) => editField(event)}
                       min="1"
@@ -193,14 +192,14 @@ const ShowInvoice = ({ user }: Props) => {
                     />
                   </div>
                 </div>
-                <hr className="my-4" />
+                <hr className="my-4"/>
                 <div className="mb-5 flex flex-row gap-4">
                   <div className="w-full flex flex-col gap-2">
                     <label className="font-bold">Bill to:</label>
                     <input
                       placeholder="Who is this invoice to?"
                       className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
-                      value={localUser.billTo}
+                      value={invoice.customerName}
                       type="text"
                       name="billTo"
                       onChange={(event) => editField(event)}
@@ -210,7 +209,7 @@ const ShowInvoice = ({ user }: Props) => {
                     <input
                       placeholder="GSTIN"
                       className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg uppercase"
-                      value={localUser.billToGstin}
+                      value={invoice.customerGstin}
                       type="text"
                       name="billToGstin"
                       onChange={(event) => editField(event)}
@@ -222,7 +221,7 @@ const ShowInvoice = ({ user }: Props) => {
                     <input
                       placeholder="Address Line 1"
                       className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
-                      value={localUser.billToAddress}
+                      value={invoice.customerAddress}
                       type="text"
                       name="billToAddress"
                       onChange={(event) => editField(event)}
@@ -233,7 +232,7 @@ const ShowInvoice = ({ user }: Props) => {
                     <input
                       placeholder="City"
                       className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
-                      value={localUser.billToCity}
+                      value={invoice.customerCity}
                       type="text"
                       name="billToCity"
                       onChange={(event) => editField(event)}
@@ -243,7 +242,7 @@ const ShowInvoice = ({ user }: Props) => {
                     <input
                       placeholder="State"
                       className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-lg"
-                      value={localUser.billToState}
+                      value={invoice.customerState}
                       type="text"
                       name="billToState"
                       onChange={(event) => editField(event)}
@@ -257,7 +256,7 @@ const ShowInvoice = ({ user }: Props) => {
                       <input
                         placeholder="Email address"
                         className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-r-lg"
-                        value={localUser.billToEmail}
+                        value={invoice.customerEmail}
                         type="email"
                         name="billToEmail"
                         onChange={(event) => editField(event)}
@@ -272,7 +271,7 @@ const ShowInvoice = ({ user }: Props) => {
                       <input
                         placeholder="Contact"
                         className="w-full placeholder:text-gray-600 pl-3 p-[6px] border bg-borderColor rounded-r-lg"
-                        value={localUser.billToContact}
+                        value={invoice.customerContact}
                         type="tel"
                         name="billToContact"
                         onChange={(event) => editField(event)}
@@ -357,40 +356,40 @@ const ShowInvoice = ({ user }: Props) => {
                   onItemizedItemEdit={onItemizedItemEdit}
                   onRowAdd={handleAddEvent}
                   onRowDel={handleRowDelete}
-                  currency={localUser.currency}
-                  items={localUser.items}
+                  currency={invoice.currency}
+                  items={invoice.items}
                 />
-                <div className="flex flex-end mt-4 justify-content-end">
+                <div className="flex justify-end mt-4">
                   <div className="col-lg-6">
-                    <div className="flex flex-row items-start justify-between">
+                    <div className="flex flex-row items-start justify-between gap-16">
                       <span className="font-bold">Subtotal: </span>
                       <span>
-                        {localUser.currency}
-                        {localUser.subTotal}
+                        {invoice.currency}
+                        {invoice.subTotal}
                       </span>
                     </div>
-                    <div className="flex flex-row items-start justify-between mt-2">
+                    <div className="flex flex-row items-start justify-between mt-2 gap-16">
                       <span className="font-bold">Discount:</span>
                       <span>
-                        <span>({localUser.discountRate || 0}%)</span>
-                        {localUser.currency}
-                        {localUser.discountAmount || 0}
+                        <span className='mr-2'>({invoice.discountRate || 0}%)</span>
+                        {invoice.currency}
+                        {invoice.discountAmount || 0}
                       </span>
                     </div>
-                    <div className="flex flex-row items-start justify-between mt-2">
+                    <div className="flex flex-row items-start justify-between mt-2 gap-16">
                       <span className="font-bold">Tax:</span>
                       <span>
-                        <span>({localUser.taxRate || 0}%)</span>
-                        {localUser.currency}
-                        {localUser.taxAmount || 0}
+                        <span className='mr-2'>({invoice.taxRate || 0}%)</span>
+                        {invoice.currency}
+                        {invoice.taxAmount || 0}
                       </span>
                     </div>
                     <hr />
-                    <div className="flex font-xl flex-row items-start justify-between">
+                    <div className="flex text-lg flex-row items-start justify-between gap-16">
                       <span className="font-bold">Total:</span>
                       <span className="font-bold">
-                        {localUser.currency}
-                        {localUser.total || 0}
+                        {invoice.currency}
+                        {invoice.totalAmount.toFixed(2) || 0}
                       </span>
                     </div>
                   </div>
@@ -400,7 +399,7 @@ const ShowInvoice = ({ user }: Props) => {
                 <textarea
                   placeholder="Thanks for your business!"
                   name="notes"
-                  value={localUser.notes}
+                  value={invoice.notes}
                   onChange={(event) => editField(event)}
                   className="my-2 block w-full placeholder:text-gray-600 bg-borderColor rounded-sm p-2"
                   rows={2}
@@ -436,7 +435,7 @@ const ShowInvoice = ({ user }: Props) => {
                     <input
                       name="taxRate"
                       type="number"
-                      value={localUser.taxRate}
+                      value={invoice.taxRate}
                       onChange={(event) => editField(event)}
                       className="w-[90%] p-2 bg-white border border-r-0 border-borderColor rounded-l-md"
                       placeholder="0.0"
@@ -456,7 +455,7 @@ const ShowInvoice = ({ user }: Props) => {
                       className="w-[90%] p-2 bg-white border border-r-0 border-borderColor rounded-l-md"
                       type="number"
                       name="discountRate"
-                      value={localUser.discountRate}
+                      value={invoice.discountRate}
                       onChange={(event) => editField(event)}
                       placeholder="0.0"
                       min="0.00"

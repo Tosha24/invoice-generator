@@ -28,10 +28,13 @@ class InvoiceModal extends React.Component {
       customerState: this.props.info.billToState,
       customerContact: this.props.info.billToContact,
       currency: this.props.currency,
+      subTotal: Number(this.props.subTotal),
       taxRate: Number(this.props.taxRate),
+      taxAmount: Number(this.props.taxAmmount),
       discountRate: Number(this.props.discountRate),
-      totalAmount: this.props.total,
-      status: "pending",
+      discountAmount: Number(this.props.discountAmmount),
+      totalAmount: Number(this.props.total),
+      status: this.props.info.status,
       items: [
         {
           id: 0,
