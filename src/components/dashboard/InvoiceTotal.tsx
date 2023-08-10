@@ -7,18 +7,18 @@ interface Props {
 
 const InvoiceTotal = ({total, paid=0} : Props) => {
   return (
-    <div className="flex flex-row justify-center gap-5">
-      <div className="border p-4 flex flex-col justify-center items-center rounded-3xl bg-lightColor">
-        <span className="text-md font-extrabold">Total Invoices: </span>
-        <span className="text-lg">{total.toFixed(0)}</span>
+    <div className="flex flex-row gap-6 rounded-md text-primaryColor">
+      <div className="font-extrabold p-1 flex flex-row gap-2 justify-center items-center rounded-md border-2 border-primaryColor">
+        <div className="text-md">Total Invoices: </div>
+        <div className="text-lg">{total.toFixed(0)}</div>
       </div>
-      <div className="border p-4 flex flex-col justify-center items-center rounded-3xl bg-lightColor">
-        <span className="text-md font-extrabold">Paid Invoices:</span>
-        <span className="text-lg">{paid.toFixed(0)}</span>
+      <div className="font-extrabold p-1 flex flex-row gap-2 justify-center items-center rounded-md border-2 border-primaryColor">
+        <div className="text-md">Paid Invoices:</div>
+        <div className="text-lg">{paid.toFixed(0)}</div>
       </div>
-      <div className="border p-4 flex flex-col items-center justify-center rounded-3xl bg-lightColor">
-        <span className="text-md font-extrabold">Unpaid Invoices:</span>
-        <span className="text-lg">{parseInt(total.toFixed(0)) - parseInt(paid.toFixed(0))}</span>
+      <div className="p-2 font-extrabold flex flex-row gap-1 items-center justify-center rounded-md border-2 border-primaryColor">
+        <div className="text-md ">Unpaid Invoices:</div>
+        <div className="text-lg ">{parseInt(total.toFixed(0)) - parseInt(paid.toFixed(0))}</div>
       </div>
     </div>
   );

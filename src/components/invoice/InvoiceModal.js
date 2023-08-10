@@ -89,7 +89,7 @@ class InvoiceModal extends React.Component {
     );
     
     return (
-      <div className="bg-white w-[80%] min-h-[40%] items-center justify-center">
+      <div className="bg-white w-[80%] min-h-[40%] items-center justify-center z-10">
         <div id="invoiceCapture">
           <div>
             <div className="flex flex-row justify-between items-start w-100 px-4 bg-gray-400">

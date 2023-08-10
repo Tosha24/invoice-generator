@@ -153,8 +153,8 @@ const ShowInvoice = ({ user, invoice }: Props) => {
     <>
       <div>
         <form onSubmit={openModal}>
-          <div className="flex flex-row gap-7 items-start justify-center w-full">
-            <div className="flex flex-col md:col-span-6 col-lg-9">
+          <div className="flex flex-row gap-8 items-start justify-center w-full">
+            <div className="flex flex-col gap-10 md:col-span-6 col-lg-9">
               <div className="border border-gray-200 rounded-lg p-4 xl:p-5 my-3 xl:my-4">
                 <div className="flex flex-row items-start justify-between mb-3">
                   <div className="flex flex-col">
@@ -408,7 +408,7 @@ const ShowInvoice = ({ user, invoice }: Props) => {
               </div>
             </div>
             <div className="flex flex-col col-md-4 col-lg-2">
-              <div className="fixed pt-md-3 pt-xl-4">
+              <div className="fixed">
                 <button
                   type="submit"
                   className="block w-full bg-primaryColor hover:bg-hoverColor text-lg text-white tracking-wider py-2 rounded-lg"

@@ -19,19 +19,18 @@ const Navbar = ({ btn }: Props) => {
 
   useEffect(() => {
     console.log(pathname);
-    if(pathname === `/profile/${params.userId}`){
-      setComponent('Home');
-    }
-    else if(pathname === `/profile/${params.userId}/my-profile`){
+    if (pathname === `/profile/${params.userId}`) {
+      setComponent("Home");
+    } else if (pathname === `/profile/${params.userId}/my-profile`) {
       setComponent("Profile");
     }
   }, []);
 
   return (
-    <div className="w-full bg-white sticky h-20 lg:h-[12vh] top-0 z-50 px-4">
+    <div className="w-full bg-white sticky h-20 lg:h-[12vh] top-0 z-5 px-4">
       <div className="max-w-container h-full mx-auto py-1 font-titleFont flex items-center justify-between">
         <div className="inline-flex items-center justify-center gap-4">
-          <Image src={logo} alt="logo" className="w-48 mx-2 md:mx-8" />
+          <Image src={logo} alt="logo" className="h-22 w-60 mx-2 md:mx-8" />
         </div>
         <div className="inline-flex items-center absolute right-4 md:right-9">
           {btn === "LOGIN" ? (
@@ -41,18 +40,38 @@ const Navbar = ({ btn }: Props) => {
               </button>
             </Link>
           ) : (
-            <div className="flex flex-row gap-4 mr-8">
-                <Link href={{ pathname: `/profile/${params.userId}`}} className='no-underline'>
-                <div className={`${component === "Home" ? "underline underline-offset-2" : "no-underline"} px-4 py-2 rounded-md text-primaryColor text-xl bg-white font-bold duration-300 font-bodyFont tracking-wider`} onClick={() => setComponent("Home")}>
+            <div className="flex flex-row gap-6">
+              <Link
+                href={{ pathname: `/profile/${params.userId}` }}
+                className="no-underline"
+              >
+                <div
+                  className={`${
+                    component === "Home"
+                      ? "border-primaryColor border-b-[3px] text-primaryColor"
+                      : "bg-white text-primaryColor"
+                  } px-1 py-1  text-lg  font-bold duration-300 font-bodyFont tracking-wider`}
+                  onClick={() => setComponent("Home")}
+                >
                   Home
                 </div>
-                </Link>
+              </Link>
 
-                <Link href={`/profile/${params.userId}/my-profile`} className='no-underline'>
-                <div className={` ${component === "Profile" ? "underline underline-offset-2" : "no-underline"} px-4 py-2 rounded-md text-primaryColor text-xl bg-white font-bold duration-300 font-bodyFont tracking-wider`} onClick={() => setComponent("Profile")}>
+              <Link
+                href={`/profile/${params.userId}/my-profile`}
+                className="no-underline"
+              >
+                <div
+                  className={` ${
+                    component === "Profile"
+                      ? "border-primaryColor border-b-[3px] text-primaryColor"
+                      : "bg-white text-primaryColor"
+                  } px-1 py-1 text-lg font-bold duration-300 font-bodyFont tracking-wider`}
+                  onClick={() => setComponent("Profile")}
+                >
                   Profile
                 </div>
-                </Link>
+              </Link>
               <Logout />
             </div>
           )}

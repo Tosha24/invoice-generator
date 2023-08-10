@@ -35,13 +35,13 @@ export default function AddInvoice() {
     <div>
       <Navbar btn="LOGOUT" />
       {user ? (
-        <div className="mx-10 md:mx-24">
-          <div
+        <div className="mx-4">
+          {/* <div
             onClick={goBack}
             className="cursor-pointer text-lg flex flex-row items-center gap-2"
           >
             <IoIosArrowBack/> Go Back
-          </div>
+          </div> */}
           <InvoiceForm user={user} />
         </div>
       ) : (

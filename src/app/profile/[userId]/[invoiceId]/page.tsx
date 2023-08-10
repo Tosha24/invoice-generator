@@ -69,27 +69,27 @@ const InvoicePage = () => {
         <div className="m-2 mx-3">
           <div className="flex flex-row w-full gap-4">
             <div className="w-1/5">
-              <div className="flex flex-col w-1/6 rounded-lg gap-8 fixed mt-4">
-                <div
+              <div className="flex flex-col w-[12%] rounded-lg gap-8 fixed mt-4">
+                {/* <div
                   onClick={goBack}
                   className="cursor-pointer text-lg flex flex-row items-center gap-2"
                 >
                   <IoIosArrowBack /> Go Back
-                </div>
-                <div className="text-[22px] items-center flex flex-row gap-x-3 w-full">
-                  <span className="font-semibold">Status: </span>
-                  <span className="bg-[#fa983a] text-white w-full p-2 rounded-md justify-center items-center flex shadow-sm text-lg">
+                </div> */}
+                <div className="text-md items-center flex flex-row gap-x-3 w-full">
+                  <span className="font-semibold text-lg">Status: </span>
+                  <span className="bg-[#fa983a] text-white w-full p-2 rounded-md justify-center items-center flex shadow-sm text-md">
                     {invoice[0]?.status}
                   </span>
                 </div>
-                <div className="flex flex-col gap-3 text-lg">
-                  <button className="p-2 px-3 border rounded-md text-white bg-green-700 shadow-sm" onClick={markAsPaid}>
+                <div className="flex flex-col gap-3 text-md">
+                  <button className="p-2  border rounded-md text-white bg-green-700 shadow-sm" onClick={markAsPaid}>
                     {paid ? "Mark as Unpaid" : "Mark as Paid"}
                   </button>
-                  <button className="p-2 px-3 border rounded-md text-white bg-[#192a56] shadow-sm" onClick={edit ? saveChanges : editInvoice}>
+                  <button className="p-2 border rounded-md text-white bg-[#192a56] shadow-sm" onClick={edit ? saveChanges : editInvoice}>
                     {edit ? "Save Changes" : "Edit"}
                   </button>
-                  <button className="p-2 px-3 border rounded-md text-white bg-red-700  shadow-sm" onClick={deleteInvoice}>
+                  <button className="p-2 border rounded-md text-white bg-red-700  shadow-sm" onClick={deleteInvoice}>
                     Delete
                   </button>
                 </div>
