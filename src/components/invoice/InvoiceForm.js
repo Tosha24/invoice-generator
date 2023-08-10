@@ -28,6 +28,7 @@ class InvoiceForm extends React.Component {
       taxAmmount: "0.00",
       discountRate: "",
       discountAmmount: "0.00",
+      status: "Unpaid",
       isLoading: false,
     };
     this.state.items = [
@@ -134,6 +135,11 @@ class InvoiceForm extends React.Component {
   onCurrencyChange = (selectedOption) => {
     this.setState(selectedOption);
   };
+
+  onStatusChange = (selectedOption) => {
+    this.setState(selectedOption);
+  } 
+
   openModal = (event) => {
     event.preventDefault();
     this.handleCalculateTotal();
@@ -175,6 +181,7 @@ class InvoiceForm extends React.Component {
                           />
                         </div>
                       </div>
+                      <div className='flex flex-col gap-2'>
                       <div className="flex flex-row items-center">
                         <span className="font-bold me-2">Invoice Number: </span>
                         <input
@@ -186,6 +193,19 @@ class InvoiceForm extends React.Component {
                           min="1"
                           required
                         />
+                      </div>
+                      <div className='flex flex-row items-center'>
+                        <span className='font-bold me-2'>Status: </span>
+                        <select className='border p-1 rounded-lg bg-borderColor px-3'
+                        onChange={(event) =>
+                          this.onStatusChange({
+                            status: event.target.value,
+                          })
+                        }>
+                          <option value="Unpaid">Unpaid</option>
+                          <option value="Paid">Paid</option>
+                        </select>
+                      </div>  
                       </div>
                     </div>
                     <hr className="my-4" />

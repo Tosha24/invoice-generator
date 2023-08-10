@@ -1,30 +1,26 @@
 import mongoose from 'mongoose';
 
 const items = {
-    itemNo: {
+    id: {
         type: Number,
         required: [false],
     },
-    itemName: {
+    name: {
         type: String,
         required: [false],
     },
-    itemDescription: {
+    description: {
         type: String,
         required: [false],
     },
-    itemQuantity: {
+    quantity: {
         type: Number,
         required: [false],
     },
-    itemRate: {
+    price: {
         type: Number,
         required: [false],
-    },
-    itemTotal: {
-        type: Number,
-        required: [false],
-    },
+    }
 }
 
 const invoiceSchema = {
@@ -33,14 +29,12 @@ const invoiceSchema = {
         required: [false],
     },
     issueDate: {
-        type: Date,
+        type: String,
         required: [false],
-        format: "DD-MM-YYYY",
     },
     dueDate: {
-        type: Date,
+        type: String,
         required: [false],
-        format: "DD-MM-YYYY",
     },
     customerName: {
         type: String,
@@ -77,7 +71,15 @@ const invoiceSchema = {
         required: [false],
         default: "₹",
     },
+    subTotal: {
+        type: Number,
+        required: [false],
+    },
     taxRate: {
+        type: Number,
+        required: [false],
+    },
+    taxAmount: {
         type: Number,
         required: [false],
     },
@@ -89,10 +91,14 @@ const invoiceSchema = {
         type: Number,
         required: [false],
     },
+    discountAmount: {
+        type: Number,
+        required: [false],
+    },
     status: {
         type: String,
         required: [false],
-        default: "Pending",
+        default: "Unpaid",
     },
 }
 

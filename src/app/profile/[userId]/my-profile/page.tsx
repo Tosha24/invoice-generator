@@ -4,6 +4,7 @@ import axios from "axios";
 import Profile from "@/components/Profile/Profile";
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading";
+import Navbar from "@/components/Navbar";
 
 const Showprofile = () => {
   const [user, setUser] = useState(null);
@@ -23,8 +24,9 @@ const Showprofile = () => {
 
   return (
     <>
+    <Navbar btn="LOGOUT"/>
       {
-        user ? <Profile user={user}/> : <div> <Loading/> </div>
+        user ? <Profile user={user}/> : <Loading/>
       }
     </>
   );
